@@ -1,0 +1,61 @@
+openapi: 3.0.0
+info:
+  title: Sample Spring Boot API
+  description: This is a Sample Api For Swagger Code Gen
+  version: 1.0.0
+
+servers:
+  - url: http://api.example.com/v1
+    description: Optional server description, e.g. Main (production) server
+  - url: http://staging-api.example.com
+    description: Optional server description, e.g. Internal staging server for testing
+
+paths:
+  /add/{firstNumber}:
+    get:
+      summary: Add the Numbers.
+      tag:
+        - " Addition "
+      description: Addition of Two Numbers.
+      operationId: addTwoNums
+      parameters:
+        - in : path
+          name: firstNumber
+          description: first Number
+          required: true
+          schema:
+            type: integer
+        - in : query
+          name: secondNumber
+          description: Second Number
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':    # status code
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: integer
+                properties:
+                  message:
+                    type: string
+        '400':    # status code
+          description: Invalid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Invalid Values"
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - BearerAuth: []
